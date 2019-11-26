@@ -24,13 +24,32 @@ set(CMAKE_BUILD_TYPE "Release")
 include_directories("${PROJECT_SOURCE_DIR}/include")
 include_directories("${PROJECT_SOURCE_DIR}/")
 
+find_package(Boost REQUIRED COMPONENTS log)
+if(NOT Boost_FOUND)
+    message("Can not find Boost")
+endif()
+message(STATUS "Found Boost IncPath ${Boost_INCLUDE_DIRS}")
+message(STATUS "Found Boost LibPath ${Boost_LIBRARY_DIRS}")
+message(STATUS "Found Boost LIBRARIES ${Boost_LIBRARIES}")
+
+add_definitions(-DBOOST_SPIRIT_THREADSAFE)
+add_definitions(-DBOOST_ALL_DYN_LINK)
+
+include_directories(${Boost_INCLUDE_DIRS})
+include_directories(${PROJECT_SOURCE_DIR})
+link_directories(${Boost_LIBRARY_DIRS})
+
+ADD_LIBRARY(common STATIC ${PROJECT_SOURCE_DIR}/src/log.cpp)
+target_link_libraries(common boost_log-mt)
+
 enable_testing()
 find_package(GTest REQUIRED)
 include_directories(${GTEST_INCLUDE_DIRS})
 
-add_executable(common
+add_executable(common_test
 "${PROJECT_SOURCE_DIR}/test/main.cpp" 
 "${PROJECT_SOURCE_DIR}/test/singleton.cpp" 
+"${PROJECT_SOURCE_DIR}/test/log.cpp" 
 )
-target_link_libraries(common ${GTEST_BOTH_LIBRARIES})
-add_test(NAME Test COMMAND common)
+target_link_libraries(common_test ${GTEST_BOTH_LIBRARIES} common)
+add_test(NAME Test COMMAND common_test)
