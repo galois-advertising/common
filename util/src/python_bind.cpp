@@ -8,7 +8,7 @@ void _log(MODULE_NAME * self, const char * type, const char * msg, ...)
     char str_tmp[PYTHON_LOG_MAXLEN];
     va_list v_arg_list;                           
     va_start(v_arg_list, msg);                 
-    vsnprintf(str_tmp, MAXLEN, msg, v_arg_list);  
+    vsnprintf(str_tmp, PYTHON_LOG_MAXLEN, msg, v_arg_list);  
     va_end(v_arg_list); 
     PyObject * log_function = PyObject_GetAttrString(reinterpret_cast<PyObject*>(self), "log");
     if(NULL != log_function || 1 == PyCallable_Check(log_function))
@@ -36,3 +36,12 @@ void pylog(MODULE_NAME * self, PyObject * args, PyObject * kwds)
         std::cerr<<"PyArg_ParseTuple error at "<<__FILE__<<":"<<__LINE__<<std::endl;
 }
 
+static void throw_exception(const char * msg, ...)
+{
+    char str_tmp[PYTHON_LOG_MAXLEN];
+    va_list v_arg_list;
+    va_start(v_arg_list, msg);                 
+    vsnprintf(str_tmp, PYTHON_LOG_MAXLEN, msg, v_arg_list);  
+    va_end(v_arg_list); 
+    PyErr_SetString(PyExc_RuntimeError, str_tmp);
+}
