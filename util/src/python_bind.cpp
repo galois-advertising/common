@@ -36,7 +36,7 @@ void pylog(MODULE_NAME * self, PyObject * args, PyObject * kwds)
         std::cerr<<"PyArg_ParseTuple error at "<<__FILE__<<":"<<__LINE__<<std::endl;
 }
 
-static void throw_exception(const char * msg, ...)
+void throw_exception(const char * msg, ...)
 {
     char str_tmp[PYTHON_LOG_MAXLEN];
     va_list v_arg_list;
