@@ -25,7 +25,7 @@ void _log(T * self, const char * type, const char * msg, ...) {
         PyObject_CallObject(log_function, args);
         Py_DECREF(args);
     } else {
-        std::cerr<<"["__FILE__<<":"<<__LINE__<<"] fails."<<std::endl;
+        std::cerr<<"["<<__FILE__<<":"<<__LINE__<<"] fails."<<std::endl;
     }
     Py_XDECREF(log_function);
 }
