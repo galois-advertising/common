@@ -1,10 +1,13 @@
 syntax="proto3";
-package galois;
+import "gcontrol.proto";
+package galois.gportal;
+
+option cc_generic_services = true;
 
 message gportal_req_t
 {
-    control_t ctrl= 1;
-    repeated gportal_src_info_t src_list = 2;
+    gcontrol.control_t ctrl= 1;
+    gportal_src_info_t src_list = 2;
     ui_t ui = 3; 
 }
 
@@ -12,6 +15,10 @@ message gportal_res_t
 {
     repeated gportal_src_res_t src_list = 1;
 }
+
+service gportal_service {
+    rpc handle(gportal_req_t) returns (gportal_res_t);
+};
 
 message ui_t
 {
@@ -47,7 +54,7 @@ message src_ui_t
 message gportal_src_res_t
 {
     uint32 src_id = 1; 
-    required adv_t adv_list = 2; 
+    adv_t adv_list = 2; 
 }
 
 message adv_t

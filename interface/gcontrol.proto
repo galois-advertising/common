@@ -1,0 +1,13 @@
+syntax="proto3";
+package galois.gcontrol;
+message ovl_param {
+    string service = 1;
+    string group = 2;
+    string name = 3;
+    string type = 4;
+    string value = 5;
+}
+message control_t {
+    uint32 version = 1;
+    repeated ovl_param params = 2;
+}
