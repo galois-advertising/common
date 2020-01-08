@@ -34,6 +34,7 @@ message(STATUS "Found Boost LIBRARIES ${Boost_LIBRARIES}")
 
 add_definitions(-DBOOST_SPIRIT_THREADSAFE)
 add_definitions(-DBOOST_ALL_DYN_LINK)
+add_definitions(-D_DEBUG)
 
 include_directories(${Boost_INCLUDE_DIRS})
 include_directories(${PROJECT_SOURCE_DIR})
