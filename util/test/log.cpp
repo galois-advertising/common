@@ -2,8 +2,11 @@
 #include "log.h"
 
 
-
-
 TEST(Test, log) {
-    log(LOG_LEVEL::FATAL, "%s\t%d", "log", 1);
+    TRACE("%s\t%d", "log", 1);
+    DEBUG("%s\t%d", "log", 1);
+    INFO("%s\t%d", "log", 1);
+    WARNING("%s\t%d", "log", 1);
+    ERROR("%s\t%d", "log", 1);
+    FATAL("%s\t%d", "log", 1);
 }
