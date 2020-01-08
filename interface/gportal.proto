@@ -1,0 +1,70 @@
+syntax="proto3";
+import "gcontrol.proto";
+package galois.gportal;
+
+option cc_generic_services = true;
+
+message gportal_req_t
+{
+    gcontrol.control_t ctrl= 1;
+    gportal_src_info_t src_list = 2;
+    ui_t ui = 3; 
+}
+
+message gportal_res_t
+{
+    repeated gportal_src_res_t src_list = 1;
+}
+
+service gportal_service {
+    rpc handle(gportal_req_t) returns (gportal_res_t);
+};
+
+message ui_t
+{
+    uint32 version = 1; 
+    bytes query = 2; 
+    uint32 ip = 3; 
+    uint32 screen_length = 4;
+    uint32 screen_width = 5;
+    uint32 page_height = 6;
+    uint32 page_width = 7;
+    bytes url = 8; 
+    bytes refer = 9; 
+    bytes os = 10; 
+    bytes browser = 11; 
+    uint32 language = 12;
+    uint32 ipv6 = 13;
+    int64 passport_user_id = 14; 
+    bytes platform = 15; 
+}
+
+message gportal_src_info_t 
+{
+    uint32 src_id = 1;
+    src_ui_t ui = 2; 
+}
+
+message src_ui_t
+{
+    uint32 src_id = 1; 
+    uint32 req_num = 2;
+}
+
+message gportal_src_res_t
+{
+    uint32 src_id = 1; 
+    adv_t adv_list = 2; 
+}
+
+message adv_t
+{
+    uint64 user_id = 1;
+    uint64 plan_id = 2;
+    uint64 unit_id = 3;
+    uint64 adx_id = 4;
+    uint64 ideal_id = 5;
+    bytes title = 6; 
+    bytes desc = 7; 
+    bytes landingpage_url = 8; 
+}
