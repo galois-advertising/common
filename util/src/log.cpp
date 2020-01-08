@@ -4,6 +4,9 @@
 
 
 void log(LOG_LEVEL loglevel, const char * file, unsigned int line, const char *fmt, ...) {
+    if (file == nullptr || fmt == nullptr) {
+        return;
+    }
     va_list args;
     char buf[2048];
     va_start(args, fmt);
