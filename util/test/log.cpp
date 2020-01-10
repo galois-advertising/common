@@ -3,7 +3,7 @@
 
 
 TEST(Test, log) {
-    TRACE("%s\t%d", "log", 1);
+    TRACE("hahahah", "");
     DEBUG("%s\t%d", "log", 1);
     INFO("%s\t%d", "log", 1);
     WARNING("%s\t%d", "log", 1);

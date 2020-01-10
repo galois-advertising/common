@@ -8,24 +8,27 @@ enum class LOG_LEVEL
     DEBUG,
     TRACE
 };
-void log(LOG_LEVEL loglevel, const char * file, unsigned int line, const char *fmt, ...);
+void log(LOG_LEVEL loglevel, const char *fmt, ...);
+#define LOGLINE(x) LOGLINE_(x)
+#define LOGLINE_(x) #x
 
 #ifdef _DEBUG
-#define TRACE(msg, ...) log(LOG_LEVEL::TRACE, __FILE__, __LINE__, msg, __VA_ARGS__);
+#define TRACE(fmt, ...) log(LOG_LEVEL::TRACE, "%c" __FILE__"][" LOGLINE(__LINE__) "]" fmt , '[', __VA_ARGS__);
+#define TRACE(fmt) log(LOG_LEVEL::TRACE, "[" __FILE__"][" LOGLINE(__LINE__) "]" fmt);
 #else
-#define TRACE(msg, ...)
+#define TRACE(fmt, ...)
 #endif
 
 #ifdef _DEBUG
-#define DEBUG(msg, ...) log(LOG_LEVEL::DEBUG, __FILE__, __LINE__, msg, __VA_ARGS__);
+#define DEBUG(fmt, ...) log(LOG_LEVEL::DEBUG, "[" __FILE__"][" LOGLINE(__LINE__) "]" fmt,  __VA_ARGS__);
 #else
-#define DEBUG(msg, ...)
+#define DEBUG(fmt, ...)
 #endif
 
-#define INFO(msg, ...) log(LOG_LEVEL::INFO, __FILE__, __LINE__, msg, __VA_ARGS__);
+#define INFO(fmt, ...) log(LOG_LEVEL::INFO, "[" __FILE__"][" LOGLINE(__LINE__) "]" fmt,  __VA_ARGS__);
 
-#define WARNING(msg, ...) log(LOG_LEVEL::WARNING, __FILE__, __LINE__, msg, __VA_ARGS__);
+#define WARNING(fmt, ...) log(LOG_LEVEL::WARNING, "[" __FILE__"][" LOGLINE(__LINE__) "]" fmt,  __VA_ARGS__);
 
-#define ERROR(msg, ...) log(LOG_LEVEL::ERROR, __FILE__, __LINE__, msg, __VA_ARGS__);
+#define ERROR(fmt, ...) log(LOG_LEVEL::ERROR, "[" __FILE__"][" LOGLINE(__LINE__) "]" fmt,  __VA_ARGS__);
 
-#define FATAL(msg, ...) log(LOG_LEVEL::FATAL, __FILE__, __LINE__, msg, __VA_ARGS__);
+#define FATAL(fmt, ...) log(LOG_LEVEL::FATAL, "[" __FILE__"][" LOGLINE(__LINE__) "]" fmt,  __VA_ARGS__);
