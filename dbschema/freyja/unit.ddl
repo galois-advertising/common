@@ -6,13 +6,21 @@ $}
 handlername = galois;
 namespace=galois::freyja;
 
-create datatable unit_table {
+create dataview unit_view on gbus::unit_event {
+    user_id : uint32_t;
+    plan_id : uint32_t;
+    unit_id : uint32_t;
+    unit_name : array char[1024u];
+};
 
+create datatable unit_table {
     property {
         type = HashTable;
     };
+    user_id : uint32_t;
     plan_id : uint32_t;
-    unit_id : uint64_t;
+    unit_id : uint32_t;
+    unit_name : array char[1024u];
     (unit_id) : uint64key, primary_key;
 };
 

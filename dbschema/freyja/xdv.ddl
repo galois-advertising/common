@@ -6,13 +6,23 @@ $}
 handlername = galois;
 namespace=galois::freyja;
 
+create dataview xdv_view on gbus::xdv_event {
+    xdv_id : uint64_t;
+    plan_id : uint32_t;
+    unit_id : uint32_t;
+    usr_id : uint32_t;
+    word_id : uint64_t;
+    bid : uint32_t;
+    bid_word : array char[1024u];
+};
+
 create datatable xdv_table {
     property {
         type = HashTable;
     };
     xdv_id : uint64_t;
     plan_id : uint32_t;
-    unit_id : uint64_t;
+    unit_id : uint32_t;
     usr_id : uint32_t;
     word_id : uint64_t;
     bid : uint32_t;
