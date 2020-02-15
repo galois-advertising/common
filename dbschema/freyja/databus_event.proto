@@ -8,105 +8,96 @@ enum event_type {
 message user_event {
     uint64 id = 1;
     event_type type = 2;
-    message update_event {
-        uint32 user_id = 1;
+    message schema_t {
+        key_t key = 1;
         uint32 user_stat = 2;
         string region = 3;
     }
-    message del_event {
+    message key_t {
         uint32 user_id = 1;
     }
     oneof event {
-        update_event update = 3;
-        del_event del = 4;
+        schema_t update = 3;
+        key_t del = 4;
     }
 }
 
 message plan_event {
     uint64 id = 1;
     event_type type = 2;
-    message update_event {
-        uint32 user_id = 1;
-        uint32 plan_id = 2;
-        uint64 region = 3;
-        string plan_name = 4;
+    message schema_t {
+        key_t key = 1;
+        uint64 region = 2;
+        string plan_name = 3;
     }
-    message del_event {
+    message key_t {
         uint32 user_id = 1;
         uint32 plan_id = 2;
     }
     oneof event {
-        update_event update = 3;
-        del_event del = 4;
+        schema_t update = 3;
+        key_t del = 4;
     }
 }
 
 message unit_event {
     uint64 id = 1;
     event_type type = 2;
-    message update_event {
-        uint32 user_id = 1;
-        uint32 plan_id = 2;
-        uint32 unit_id = 3;
-        uint64 region = 4;
-        string unit_name = 5;
+    message schema_t {
+        key_t key = 1;
+        uint64 region = 2;
+        string unit_name = 3;
     }
-    message del_event {
+    message key_t {
         uint32 user_id = 1;
         uint32 plan_id = 2;
         uint32 unit_id = 3;
     }
     oneof event {
-        update_event update = 3;
-        del_event del = 4;
+        schema_t update = 3;
+        key_t del = 4;
     }
 }
 
 message xdv_event {
     uint64 id = 1;
     event_type type = 2;
-    message update_event {
-        uint32 user_id = 1;
-        uint32 plan_id = 2;
-        uint32 unit_id = 3;
-        uint32 xdv_id = 4;
-        uint64 word_id = 5;
-        uint32 bid = 6;
-        string bid_word = 7;
+    message schema_t {
+        key_t key = 1;
+        uint64 word_id = 2;
+        uint32 bid = 3;
+        string bid_word = 4;
     }
-    message del_event {
+    message key_t {
         uint32 user_id = 1;
         uint32 plan_id = 2;
         uint32 unit_id = 3;
         uint32 xdv_id = 4;
     }
     oneof event {
-        update_event update = 3;
-        del_event del = 4;
+        schema_t update = 3;
+        key_t del = 4;
     }
 }
 
 message idea_event {
     uint64 id = 1;
     event_type type = 2;
-    message update_event {
-        uint32 user_id = 1;
-        uint32 plan_id = 2;
-        uint32 unit_id = 3;
-        uint32 idea_id = 4;
-        repeated uint32 xdv_ids = 5;
-        string title = 6;
-        string description = 7;
+    message schema_t {
+        key_t key = 1;
+        repeated uint32 xdv_ids = 2;
+        string title = 3;
+        string description = 4;
         
     }
-    message del_event {
+    message key_t {
         uint32 user_id = 1;
         uint32 plan_id = 2;
         uint32 unit_id = 3;
         uint32 idea_id = 4;
     }
     oneof event {
-        update_event update = 3;
-        del_event del = 4;
+        schema_t update = 3;
+        key_t del = 4;
     }
 }
