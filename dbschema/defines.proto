@@ -1,0 +1,6 @@
+syntax="proto3";
+package galois;
+enum event_type {
+    update = 0;
+    del = 1;
+}
