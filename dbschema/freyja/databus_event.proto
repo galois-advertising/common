@@ -1,6 +1,9 @@
 syntax="proto3";
 package galois.freyja;
-import "defines.proto";
+enum event_type {
+    update = 0;
+    del = 1;
+}
 
 message user_event {
     uint64 id = 1;
