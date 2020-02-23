@@ -24,8 +24,21 @@ create datatable plan_table {
     (user_id, plan_id) : uint64key, primary_key;
 };
 
-create dataupdator plan_view -> plan_table{
+create dataupdator plan_view -> plan_table {
     property {
         udf = plan_view_to_plan_table;
     };
 };
+
+
+create indextable plan_index on plan_table::plan_id {
+    property {
+        type = HashTable;
+    };
+    user_id : uint32_t;
+    plan_id : uint32_t;
+    region : uint64_t;
+    plan_name: array char[1024u];
+};
+
+create indexupdator plan_table -> plan_index {};
