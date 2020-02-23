@@ -35,3 +35,12 @@ create dataupdator idea_view -> idea_table {
         udf = idea_view_to_idea_table;
     };
 };
+
+create indextable idea_index on idea_table::user_id {
+    idea_id : uint64_t;
+    unit_id : uint64_t;
+    plan_id : uint32_t;
+    user_id  : uint32_t;
+};
+
+create indexupdator idea_table -> idea_index {};
