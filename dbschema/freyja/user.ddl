@@ -1,15 +1,23 @@
 {$
 #include <iostream>
 #include <vector>
+#include "databus_event.pb.h"
 $}
 
-handlername = galois;
+handlername = freyja_env;
 namespace=galois::freyja;
 
 create dataview user_view on gbus::user_event {
+    property {
+        udf = user_view_udf;
+    };
     user_id : uint32_t;
     user_stat : uint32_t;
     region: uint64_t;
+    user_name: array char[1024u];
+    derivative {
+        user_name_sign: uint64_t, from(user_name);
+    };
 };
 
 create datatable user_table {
@@ -19,6 +27,7 @@ create datatable user_table {
     user_id : uint32_t;
     user_stat : uint32_t;
     region: uint64_t;
+    user_name_sign: uint64_t;
     (usr_id) : uint64key, primary_key;
 };
 

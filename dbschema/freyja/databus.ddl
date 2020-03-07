@@ -1,9 +1,10 @@
 {$
 #include <iostream>
 #include <vector>
+#include "databus_event.pb.h"
 $}
 
-handlername = galois;
+handlername = freyja_env;
 namespace=galois::freyja;
 
 create datasource gbus {

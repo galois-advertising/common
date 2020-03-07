@@ -10,8 +10,12 @@ message user_event {
     event_type type = 2;
     message schema_t {
         key_t key = 1;
-        uint32 user_stat = 2;
-        string region = 3;
+        uint32 user_stat = 3;
+        string region = 4;
+        string user_name = 5;
+    }
+    message derivative_t {
+        uint64 user_name_sign = 1;
     }
     message key_t {
         uint32 user_id = 1;
@@ -27,8 +31,11 @@ message plan_event {
     event_type type = 2;
     message schema_t {
         key_t key = 1;
-        uint64 region = 2;
-        string plan_name = 3;
+        uint64 region = 3;
+        string plan_name = 4;
+    }
+    message derivative_t {
+        uint64 plan_name_sign = 1;
     }
     message key_t {
         uint32 user_id = 1;
@@ -45,8 +52,11 @@ message unit_event {
     event_type type = 2;
     message schema_t {
         key_t key = 1;
-        uint64 region = 2;
-        string unit_name = 3;
+        uint64 region = 3;
+        string unit_name = 4;
+    }
+    message derivative_t {
+        uint64 unit_name_sign = 1;
     }
     message key_t {
         uint32 user_id = 1;
@@ -64,9 +74,12 @@ message xdv_event {
     event_type type = 2;
     message schema_t {
         key_t key = 1;
-        uint64 word_id = 2;
-        uint32 bid = 3;
-        string bid_word = 4;
+        uint64 word_id = 3;
+        uint32 bid = 4;
+        string bid_word = 5;
+    }
+    message derivative_t {
+        uint64 bid_word_sign = 1;
     }
     message key_t {
         uint32 user_id = 1;
@@ -85,10 +98,12 @@ message idea_event {
     event_type type = 2;
     message schema_t {
         key_t key = 1;
-        repeated uint32 xdv_ids = 2;
-        string title = 3;
-        string description = 4;
+        repeated uint32 xdv_ids = 3;
+        string title = 4;
+        string description = 5;
         
+    }
+    message derivative_t {
     }
     message key_t {
         uint32 user_id = 1;

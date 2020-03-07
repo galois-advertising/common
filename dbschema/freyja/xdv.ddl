@@ -1,12 +1,16 @@
 {$
 #include <iostream>
 #include <vector>
+#include "databus_event.pb.h"
 $}
 
-handlername = galois;
+handlername = freyja_env;
 namespace=galois::freyja;
 
 create dataview xdv_view on gbus::xdv_event {
+    property {
+        udf = xdv_view_udf;
+    };
     xdv_id : uint64_t;
     plan_id : uint32_t;
     unit_id : uint32_t;
@@ -14,6 +18,9 @@ create dataview xdv_view on gbus::xdv_event {
     word_id : uint64_t;
     bid : uint32_t;
     bid_word : array char[1024u];
+    derivative {
+        bid_word_sign: uint64_t, from(bid_word);
+    };
 };
 
 create datatable xdv_table {
