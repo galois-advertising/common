@@ -28,7 +28,7 @@ create datatable user_table {
     user_stat : uint32_t;
     region: uint64_t;
     user_name_sign: uint64_t;
-    (usr_id) : uint64key, primary_key;
+    (user_id) : uint32key, primary_key;
 };
 
 create dataupdator user_view -> user_table {
