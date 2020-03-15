@@ -28,7 +28,7 @@ create datatable idea_table {
     xdv_ids : array uint64_t[1024u];
     title: array char[1024u];
     description : array char[1024u];
-    (idea_id) : uint64key, primary_key;
+    (user_id, plan_id, unit_id, idea_id) : uint64key, primary_key;
 };
 
 create dataupdator idea_view -> idea_table {
