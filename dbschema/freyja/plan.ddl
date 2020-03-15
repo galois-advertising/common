@@ -38,14 +38,6 @@ create dataupdator plan_view -> plan_table {
 };
 
 
-create indextable plan_index on plan_table::plan_id {
-    property {
-        type = HashTable;
-    };
-    user_id : uint32_t;
-    plan_id : uint32_t;
-    region : uint64_t;
-    plan_name: array char[1024u];
-};
+create indextable plan_index on plan_table::plan_id {};
 
 create indexupdator plan_table -> plan_index {};

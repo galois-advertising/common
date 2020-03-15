@@ -37,13 +37,6 @@ create dataupdator user_view -> user_table {
     };
 };
 
-create indextable user_index on user_table::region {
-    property {
-        type = HashTable;
-    };
-    user_id : uint32_t;
-    user_stat : uint32_t;
-    region: uint64_t;
-};
+create indextable user_index on user_table::region {};
 
 create indexupdator user_table -> user_index {};
