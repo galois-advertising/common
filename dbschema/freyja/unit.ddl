@@ -32,12 +32,6 @@ create datatable unit_table {
     (user_id, plan_id, unit_id) : uint32key, primary_key;
 };
 
-create dataupdator unit_view -> xdv_table {
-    property {
-        udf = unit_view_to_xdv_table;
-    };
-};
-
 create dataupdator unit_view -> unit_table {
     property {
         udf = unit_view_to_unit_table;
