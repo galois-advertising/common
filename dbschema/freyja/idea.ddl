@@ -12,9 +12,9 @@ create dataview idea_view on gbus::idea_event {
     unit_id : uint64_t;
     plan_id : uint32_t;
     user_id : uint32_t;
-    xdv_ids : array uint64_t[constant::max_xdv_id_len];
-    title: array char[constant::max_title_len];
-    description : array char[constant::max_description_len];
+    xdv_ids : array uint64_t[1024u];
+    title: array char[1024u];
+    description : array char[1024u];
 };
 
 create datatable idea_table {
@@ -25,9 +25,9 @@ create datatable idea_table {
     unit_id : uint64_t;
     plan_id : uint32_t;
     user_id  : uint32_t;
-    xdv_ids : array uint64_t[constant::max_xdv_id_len];
-    title: array char[constant::max_title_len];
-    description : array char[constant::max_description_len];
+    xdv_ids : array uint64_t[1024u];
+    title: array char[1024u];
+    description : array char[1024u];
     (idea_id) : uint64key, primary_key;
 };
 
