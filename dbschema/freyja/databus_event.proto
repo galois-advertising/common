@@ -16,6 +16,7 @@ message user_event {
     }
     message derivative_t {
         uint64 user_name_sign = 1;
+        uint64 region = 2;
     }
     message key_t {
         uint32 user_id = 1;
