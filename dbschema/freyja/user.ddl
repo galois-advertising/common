@@ -28,6 +28,7 @@ create datatable user_table {
     };
     user_id : uint32_t;
     user_stat : uint32_t;
+    address : array char[1024u];
     region: uint64_t;
     user_name_sign: uint64_t;
     (user_id) : uint32key, primary_key;
