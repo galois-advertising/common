@@ -43,3 +43,6 @@ create dataupdator xdv_view -> xdv_table {
     };
 };
 
+create indextable plan_id_index on xdv_table::plan_id {};
+create indexupdator xdv_table -> plan_id_index {};
+

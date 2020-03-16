@@ -13,6 +13,7 @@ message user_event {
         uint32 user_stat = 3;
         string region = 4;
         string user_name = 5;
+        string address = 6;
     }
     message derivative_t {
         uint64 user_name_sign = 1;
