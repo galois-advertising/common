@@ -1,8 +1,9 @@
 syntax="proto3";
 package galois.freyja;
 enum event_type {
-    update = 0;
-    del = 1;
+    insert = 0;
+    update = 1;
+    del = 2;
 }
 
 message user_event {
