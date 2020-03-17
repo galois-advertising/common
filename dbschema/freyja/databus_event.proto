@@ -79,6 +79,7 @@ message xdv_event {
         uint64 word_id = 3;
         uint32 bid = 4;
         string bid_word = 5;
+        float smart_bid_coefficient = 6;
     }
     message derivative_t {
         uint64 bid_word_sign = 1;
