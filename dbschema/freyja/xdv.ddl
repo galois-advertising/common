@@ -16,6 +16,7 @@ create dataview xdv_view on gbus::xdv_event {
     unit_id : uint32_t;
     user_id : uint32_t;
     word_id : uint64_t;
+    smart_bid_coefficient : double;
     bid : uint32_t;
     bid_word : array char[1024u];
     derivative {
