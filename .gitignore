@@ -1,3 +1,4 @@
 util/build
 *.pb.cc
 *.pb.h
+*.xml
