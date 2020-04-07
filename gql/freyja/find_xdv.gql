@@ -1,0 +1,24 @@
+find_xdv:
+select
+    user_table.user_id, user_table.user_stat, user_table.region,
+    plan_table.plan_id, plan_table.region,
+    unit_table.unit_id, xdv_table.xdv_id
+from 
+    xdv_table
+    left join user_table on (xdv_table.user_id  = user_table.user_id)
+    left join plan_table on (xdv_table.plan_id  = plan_table.plan_id)
+    left join unit_table on (xdv_table.unit_id  = unit_table.unit_id)
+where
+    not (user_table.user_stat = 1)
+    and user_table.region in $TargetRegion
+    and plan_table.region in $TargetRegion
+;
+
+find_user:
+select 
+    user_table.user_id
+from 
+    user_table
+where
+    user_table.region = $TargetRegion
+;

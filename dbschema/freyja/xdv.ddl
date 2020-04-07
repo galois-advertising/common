@@ -14,8 +14,9 @@ create dataview xdv_view on gbus::xdv_event {
     xdv_id : uint64_t;
     plan_id : uint32_t;
     unit_id : uint32_t;
-    usr_id : uint32_t;
+    user_id : uint32_t;
     word_id : uint64_t;
+    smart_bid_coefficient : double;
     bid : uint32_t;
     bid_word : array char[1024u];
     derivative {
@@ -30,11 +31,12 @@ create datatable xdv_table {
     xdv_id : uint64_t;
     plan_id : uint32_t;
     unit_id : uint32_t;
-    usr_id : uint32_t;
+    user_id : uint32_t;
     word_id : uint64_t;
+    smart_bid_coefficient : double;
     bid : uint32_t;
     bid_word : array char[1024u];
-    (xdv_id) : uint64key, primary_key;
+    (user_id, plan_id, unit_id, xdv_id) : uint64key, primary_key;
 };
 
 create dataupdator xdv_view -> xdv_table {
@@ -42,4 +44,8 @@ create dataupdator xdv_view -> xdv_table {
         udf = xdv_view_to_xdv_table;
     };
 };
+
+create indextable plan_id_index on xdv_table::plan_id {};
+
+create indexupdator xdv_table -> plan_id_index {};
 

@@ -13,10 +13,12 @@ create dataview user_view on gbus::user_event {
     };
     user_id : uint32_t;
     user_stat : uint32_t;
-    region: uint64_t;
+    address : array char[1024u];
+    region: array char[1024u];
     user_name: array char[1024u];
     derivative {
         user_name_sign: uint64_t, from(user_name);
+        region: uint64_t, from(region);
     };
 };
 
@@ -26,9 +28,10 @@ create datatable user_table {
     };
     user_id : uint32_t;
     user_stat : uint32_t;
+    address : array char[1024u];
     region: uint64_t;
     user_name_sign: uint64_t;
-    (usr_id) : uint64key, primary_key;
+    (user_id) : uint32key, primary_key;
 };
 
 create dataupdator user_view -> user_table {
@@ -37,13 +40,10 @@ create dataupdator user_view -> user_table {
     };
 };
 
-create indextable user_index on user_table::region {
-    property {
-        type = HashTable;
-    };
-    user_id : uint32_t;
-    user_stat : uint32_t;
-    region: uint64_t;
-};
+create indextable region_index on user_table::region {};
 
-create indexupdator user_table -> user_index {};
+create indexupdator user_table -> region_index {};
+
+create indextable address_index on user_table::address {};
+
+create indexupdator user_table -> address_index {};

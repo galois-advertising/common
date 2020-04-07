@@ -1,8 +1,9 @@
 syntax="proto3";
 package galois.freyja;
 enum event_type {
-    update = 0;
-    del = 1;
+    insert = 0;
+    update = 1;
+    del = 2;
 }
 
 message user_event {
@@ -13,9 +14,11 @@ message user_event {
         uint32 user_stat = 3;
         string region = 4;
         string user_name = 5;
+        string address = 6;
     }
     message derivative_t {
         uint64 user_name_sign = 1;
+        uint64 region = 2;
     }
     message key_t {
         uint32 user_id = 1;
@@ -77,6 +80,7 @@ message xdv_event {
         uint64 word_id = 3;
         uint32 bid = 4;
         string bid_word = 5;
+        float smart_bid_coefficient = 6;
     }
     message derivative_t {
         uint64 bid_word_sign = 1;

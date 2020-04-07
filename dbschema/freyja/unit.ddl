@@ -29,13 +29,7 @@ create datatable unit_table {
     plan_id : uint32_t;
     unit_id : uint32_t;
     unit_name_sign: uint64_t;
-    (unit_id) : uint64key, primary_key;
-};
-
-create dataupdator unit_view -> xdv_table {
-    property {
-        udf = unit_view_to_xdv_table;
-    };
+    (user_id, plan_id, unit_id) : uint32key, primary_key;
 };
 
 create dataupdator unit_view -> unit_table {
