@@ -11,13 +11,13 @@
 #include <functional>
 #include <stdexcept>
 
-class ThreadPool {
+class thread_pool {
 public:
-    ThreadPool(size_t);
+    thread_pool(size_t);
     template<class F, class... Args>
     auto enqueue(F&& f, Args&&... args) 
-        -> std::future<typename std::result_of<F(Args...)>::type>;
-    ~ThreadPool();
+        -> std::shared_future<typename std::result_of<F(Args...)>::type>;
+    ~thread_pool();
 private:
     // need to keep track of threads so we can join them
     std::vector< std::thread > workers;
@@ -31,7 +31,7 @@ private:
 };
  
 // the constructor just launches some amount of workers
-inline ThreadPool::ThreadPool(size_t threads)
+inline thread_pool::thread_pool(size_t threads)
     :   stop(false)
 {
     for(size_t i = 0;i<threads;++i)
@@ -60,8 +60,8 @@ inline ThreadPool::ThreadPool(size_t threads)
 
 // add new work item to the pool
 template<class F, class... Args>
-auto ThreadPool::enqueue(F&& f, Args&&... args) 
-    -> std::future<typename std::result_of<F(Args...)>::type>
+auto thread_pool::enqueue(F&& f, Args&&... args) 
+    -> std::shared_future<typename std::result_of<F(Args...)>::type>
 {
     using return_type = typename std::result_of<F(Args...)>::type;
 
@@ -69,13 +69,13 @@ auto ThreadPool::enqueue(F&& f, Args&&... args)
             std::bind(std::forward<F>(f), std::forward<Args>(args)...)
         );
         
-    std::future<return_type> res = task->get_future();
+    std::shared_future<return_type> res = task->get_future();
     {
         std::unique_lock<std::mutex> lock(queue_mutex);
 
         // don't allow enqueueing after stopping the pool
         if(stop)
-            throw std::runtime_error("enqueue on stopped ThreadPool");
+            throw std::runtime_error("enqueue on stopped thread_pool");
 
         tasks.emplace([task](){ (*task)(); });
     }
@@ -84,7 +84,7 @@ auto ThreadPool::enqueue(F&& f, Args&&... args)
 }
 
 // the destructor joins all threads
-inline ThreadPool::~ThreadPool()
+inline thread_pool::~thread_pool()
 {
     {
         std::unique_lock<std::mutex> lock(queue_mutex);
