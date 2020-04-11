@@ -19,7 +19,7 @@ set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -g")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g")
 set(CMAKE_CXX_FLAGS_DEBUG "$ENV{CXXFLAGS} -O0 -Wall -g -ggdb -std=c++2a -fno-strict-aliasing -Wno-register")
 set(CMAKE_CXX_FLAGS_RELEASE "$ENV{CXXFLAGS} -O3 -Wall -std=c++2a -fno-strict-aliasing -Wno-register")
-set(CMAKE_BUILD_TYPE "Debug")
+set(CMAKE_BUILD_TYPE "Release")
 
 include_directories("${PROJECT_SOURCE_DIR}/include")
 include_directories("${PROJECT_SOURCE_DIR}/")
@@ -40,7 +40,11 @@ include_directories(${Boost_INCLUDE_DIRS})
 include_directories(${PROJECT_SOURCE_DIR})
 link_directories(${Boost_LIBRARY_DIRS})
 
-ADD_LIBRARY(common STATIC ${PROJECT_SOURCE_DIR}/src/log.cpp)
+set(SRCS "${PROJECT_SOURCE_DIR}/src/log.cpp"
+"${PROJECT_SOURCE_DIR}/src/net.cpp"
+)
+
+ADD_LIBRARY(common STATIC ${SRCS})
 target_link_libraries(common boost_log-mt)
 
 enable_testing()
@@ -51,7 +55,7 @@ add_executable(common_test
 "${PROJECT_SOURCE_DIR}/test/main.cpp" 
 "${PROJECT_SOURCE_DIR}/test/singleton.cpp" 
 "${PROJECT_SOURCE_DIR}/test/log.cpp" 
-"${PROJECT_SOURCE_DIR}/test/cache.cpp" 
+"${PROJECT_SOURCE_DIR}/test/net.cpp" 
 )
 target_link_libraries(common_test ${GTEST_BOTH_LIBRARIES} common)
 add_test(NAME Test COMMAND common_test)

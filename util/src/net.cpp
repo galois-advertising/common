@@ -1,3 +1,14 @@
+#include <string>
+#include <sys/time.h>
+#include <sys/types.h>
+#include <unistd.h>
+#include <sys/select.h>
+#include <errno.h>
+#include <stdarg.h>
+#include <unistd.h>
+#include <arpa/inet.h>  
+#include <netinet/in.h>
+#include <netinet/tcp.h>
 #include "net.h"
 #include "log.h"
 

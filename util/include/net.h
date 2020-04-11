@@ -1,9 +1,5 @@
 #pragma once
 #include <sys/socket.h>
-#include <sys/time.h>
-#include <sys/types.h>
-#include <unistd.h>
-#include <sys/select.h>
 
 namespace galois::net {
 
