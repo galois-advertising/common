@@ -1,19 +1,5 @@
-project(common)
+project(common_util)
 cmake_minimum_required(VERSION 2.8)
-set (Tutorial_VERSION_MAJOR 1)
-set (Tutorial_VERSION_MINOR 0)
-if(CMAKE_SYSTEM_NAME MATCHES "Linux")
-message(${PROJECT_SOURCE_DIR})
-message(${PROJECT_BINARY_DIR})
-set (VERSION_MAJOR 1)
-set (VERSION_MINOR 0)
-#configure_file (
-#  "${PROJECT_SOURCE_DIR}/common/config.h.in"
-#  "${PROJECT_BINARY_DIR}/common/config.h"
-#  )
-#set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -Wl,-Bsymbolic")
-else()
-endif()
 
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -g")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g")
@@ -44,18 +30,18 @@ set(SRCS "${PROJECT_SOURCE_DIR}/src/log.cpp"
 "${PROJECT_SOURCE_DIR}/src/net.cpp"
 )
 
-ADD_LIBRARY(common STATIC ${SRCS})
-target_link_libraries(common boost_log-mt)
+ADD_LIBRARY(common_util STATIC ${SRCS})
+target_link_libraries(common_util boost_log-mt)
 
 enable_testing()
 find_package(GTest REQUIRED)
 include_directories(${GTEST_INCLUDE_DIRS})
 
-add_executable(common_test
+add_executable(common_util_test
 "${PROJECT_SOURCE_DIR}/test/main.cpp" 
 "${PROJECT_SOURCE_DIR}/test/singleton.cpp" 
 "${PROJECT_SOURCE_DIR}/test/log.cpp" 
 "${PROJECT_SOURCE_DIR}/test/net.cpp" 
 )
-target_link_libraries(common_test ${GTEST_BOTH_LIBRARIES} common)
-add_test(NAME Test COMMAND common_test)
+target_link_libraries(common_util_test ${GTEST_BOTH_LIBRARIES} common_util)
+add_test(NAME Test COMMAND common_util_test)
