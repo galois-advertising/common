@@ -14,6 +14,14 @@
 
 namespace galois::net {
 
+bool test_fd_read_closed(fd_t fd) {
+    char buffer[1];
+    if (recv(fd, buffer, sizeof(buffer), MSG_PEEK | MSG_DONTWAIT) == 0) {
+        return true;
+    }
+    return false;
+}
+
 int close_wrap(fd_t fd) {
     return close(fd);
 }

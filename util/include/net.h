@@ -5,6 +5,7 @@ namespace galois::net {
 
 using socket_t = int;
 using fd_t = int;
+bool test_fd_read_closed(fd_t fd);
 int listen_wrap(fd_t, int backlog);
 int select_wrap(int nfds, fd_set* readfds, fd_set* writefds, fd_set* exceptfds, timeval* timeout);
 int accept_wrap(fd_t, sockaddr* sa, socklen_t* addrlen);
