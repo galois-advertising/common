@@ -1,4 +1,5 @@
 #include <string>
+#include <cstdarg>
 #include <boost/log/trivial.hpp>
 #include "log.h"
 
