@@ -1,11 +1,12 @@
 PROJECT(common_util)
 CMAKE_MINIMUM_REQUIRED(VERSION 2.8)
 
-SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -g")
-SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g")
+SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -O3 -Wall -g -ggdb")
+SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -Wall -g -ggdb -std=c++17 -fno-strict-aliasing -Wno-register")
+
 SET(CMAKE_CXX_FLAGS_DEBUG "$ENV{CXXFLAGS} -O0 -Wall -g -ggdb -std=c++17 -fno-strict-aliasing -Wno-register")
 SET(CMAKE_CXX_FLAGS_RELEASE "$ENV{CXXFLAGS} -O3 -Wall -std=c++17 -fno-strict-aliasing -Wno-register")
-SET(CMAKE_BUILD_TYPE "Release")
+MESSAGE("common CMAKE_BUILD_TYPE: ${CMAKE_BUILD_TYPE}")
 
 INCLUDE_DIRECTORIES("${PROJECT_SOURCE_DIR}/util/include")
 
