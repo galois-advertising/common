@@ -1,3 +1,6 @@
+handlername = demo;
+namespace = galois::user;
+
 find_xdv:
 select
     user_table.user_id, user_table.user_stat, user_table.region,
@@ -5,13 +8,19 @@ select
     unit_table.unit_id, xdv_table.xdv_id
 from 
     xdv_table
-    left join user_table on (xdv_table.user_id  = user_table.user_id)
-    left join plan_table on (xdv_table.plan_id  = plan_table.plan_id)
-    left join unit_table on (xdv_table.unit_id  = unit_table.unit_id)
+    join user_table scan limit $scanlimit1 each scan limit $eachscanlimit1 on (xdv_table.user_id  = user_table.user_id)
+    leftjoin plan_table scan limit $scanlimit2 each scan limit $eachscanlimit2 on (xdv_table.plan_id  = plan_table.plan_id)
+    leftjoin unit_table scan limit $scanlimit3 each scan limit $eachscanlimit3 on (xdv_table.unit_id  = unit_table.unit_id)
 where
-    not (user_table.user_stat = 1)
+    xdv_table.xdv_id in $xdv_id_list and
+    not (user_table.user_stat = $one)
     and user_table.region in $TargetRegion
     and plan_table.region in $TargetRegion
+    or (
+        @len(user_table.url_sign) != $zero
+        and @max(xdv_table.bid) >= $one
+        and @not_null(plan_table.plan_id) = $true
+    )
 ;
 
 find_user:
