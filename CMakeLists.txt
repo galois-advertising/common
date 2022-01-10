@@ -40,7 +40,7 @@ SET(SRCS "${PROJECT_SOURCE_DIR}/util/src/log.cpp"
 )
 
 ADD_LIBRARY(common STATIC ${SRCS})
-TARGET_LINK_LIBRARIES(common boost_log-mt)
+TARGET_LINK_LIBRARIES(common boost_log)
 
 ADD_EXECUTABLE(common_util_test
 "${PROJECT_SOURCE_DIR}/util/test/main.cpp" 
